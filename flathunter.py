@@ -37,7 +37,7 @@ __log__ = logging.getLogger(__name__)
 
 
 def launch_flat_hunt(config):
-    searchers = [CrawlImmobilienscout(), CrawlWgGesucht(),CrawlEbayKleinanzeigen()]
+    searchers = [CrawlImmobilienscout(), CrawlWgGesucht(), CrawlEbayKleinanzeigen()]
     id_watch = IdMaintainer('%s/processed_ids.db' % os.path.dirname(os.path.abspath(__file__)))
 
     hunter = Hunter()
@@ -53,7 +53,7 @@ def main():
     parser = argparse.ArgumentParser(description="Searches for flats on Immobilienscout24.de and wg-gesucht.de and "
                                                  "sends results to Telegram User", epilog="Designed by Nody")
     parser.add_argument('--config', '-c',
-                        type=argparse.FileType('r', encoding='UTF-8'),
+                        type=argparse.FileType('r'), #encoding='UTF-8'
                         default='%s/config.yaml' % os.path.dirname(os.path.abspath(__file__)),
                         help="Config file to use. If not set, try to use '%s/config.yaml' " %
                              os.path.dirname(os.path.abspath(__file__))
@@ -63,6 +63,7 @@ def main():
     # load config
     config_handle = args.config
     __log__.info("Using config %s" % config_handle.name)
+    print(config_handle.name)
     config = yaml.load(config_handle.read())
 
     # check config

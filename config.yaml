@@ -2,7 +2,7 @@
 # Between each loop it waits for <sleeping_time> seconds.
 loop:
     active: yes
-    sleeping_time: 600
+    sleeping_time: 180
 
 # List the URLs containing your filter properties below.
 # Currently supported services: www.immobilienscout24.de and
@@ -11,9 +11,11 @@ loop:
 # 	- https://www.immobilienscout24.de/Suche/...
 # 	- https://www.wg-gesucht.de/...
 urls:
-	- https://www.immobilienscout24.de/Suche/...
-	- https://www.wg-gesucht.de/...
-
+- https://www.immobilienscout24.de/Suche/S-T/Wohnung-Miete/Polygonsuche/a%7C%7CeIcwp%7B@cPiEiUaz@cn@%3F%7DU_Nw%7C@_pDab@wkDwYyYbD%7DuG~SyeA%7Cx@_k@baBxh@plB%7CuAjLvv@jdB~%7DDoQbhBeIpjI/2,50-/60,00-/EURO--1200,00?enteredFrom=result_list&viewMode=MAP#/?boundingBox=53.500172%2C9.797094%2C53.639218%2C10.181616
+# - https://www.wg-gesucht.de/wohnungen-in-Hamburg.55.2.1.0.html
+# - https://www.wg-gesucht.de/wohnungen-in-Hamburg.55.2.1.0.html?offer_filter=1&sort_column=3&noDeact=1&city_id=55&category=2&rent_type=0&sMin=55&rMax=1200&dFr=1567288800&radAdd=Dammtor&radDis=10000&exc=2
+# - https://www.ebay-kleinanzeigen.de/s-wohnung-mieten/eimsbuettel/preis:900:1200/c203l16446+wohnung_mieten.qm_d:60,+wohnung_mieten.zimmer_d:2,
+# - https://www.ebay-kleinanzeigen.de/s-wohnung-mieten/altona/preis:900:1200/c203l9497+wohnung_mieten.qm_d:60,+wohnung_mieten.zimmer_d:2,
 # If an expose includes an address, the bot is capable of
 # displaying the distance and time to travel (duration) to
 # some configured other addresses, for specific kinds of
@@ -31,19 +33,22 @@ urls:
 # each with a different label. Furthermore a place for
 # "Jane" is included, located at the given destination and
 # with the same kinds of travel.
+
 durations:
-    - name: Flo
+    - name: Hauptbahnhof
+      destination: Hauptbahnhof, Hamburg
+      modes: 
+          - gm_id: transit
+            title: "Öff."
+          - gm_id: bicycle
+            title: "Rad"
+    - name: Informatikum
       destination: Informatikum, Hamburg
       modes: 
           - gm_id: transit
             title: "Öff."
           - gm_id: bicycle
             title: "Rad"
-    - name: Sirka
-      destination: Hauptbahnhof, Hamburg
-      modes: 
-          - gm_id: transit
-            title: "Öff."
 
 # Multiline message (yes, the | is supposed to be there), 
 # to format the message received from the Telegram bot. 
@@ -70,7 +75,7 @@ message: |
 # To use the Google Maps API, an API key is required. You can obtain one
 # without costs from the Google App Console (just google for it).
 google_maps_api:
-    key: AIzaSyBW4P-PLa5B1XlEsrcEAfg7L13yo64zY3Q
+    key: AIzaSyBvg23__gtecGuLiEKlIC79NvS60LVxbGA
     url: https://maps.googleapis.com/maps/api/distancematrix/json?origins={origin}&destinations={dest}&mode={mode}&sensor=true&key={key}&arrival_time={arrival}
 
 # Sending messages using Telegram requires a Telegram Bot configured. 
@@ -86,7 +91,7 @@ google_maps_api:
 #       - 12345....
 #       - 67890....
 telegram:
-    bot_token:860563314:AAGyRpbogu1AWKjUdifJv_za6seWSjeeDbk
-    receiver_ids:
-	-271961524
-	-624642098
+    bot_token: 860563314:AAGyRpbogu1AWKjUdifJv_za6seWSjeeDbk
+    receiver_ids: 
+        - 271961524
+        - 624642098
